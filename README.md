@@ -6,6 +6,8 @@ Original fakeViewport project: https://github.com/Samuel1698/fakeViewport
 
 This Windows version is built separately with native PowerShell and Chrome flags so it can run without Python, Selenium, or Linux services.
 
+Portions of the behavior and UniFi Protect selector approach are based on the MIT-licensed original project. The original copyright notice is preserved in `LICENSE`.
+
 ## What It Does
 
 - Opens UniFi Protect in Google Chrome.
