@@ -150,3 +150,7 @@ Close the PowerShell window, then close Chrome. If you installed the startup sho
 Chrome kiosk mode does not expose tabs or normal browser controls. Press `Alt+F4` to close it, or use `Ctrl+Alt+Del` / Task Manager if the display machine does not have a keyboard.
 
 UniFi Protect stream quality is controlled by the Protect web app. Set it once in the dedicated Chrome profile and it should persist for later launches.
+
+## License
+
+MIT. See `LICENSE`.
