@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fakeviewport-win setup</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #5d6875;
+      --line: #d9dee5;
+      --accent: #1464f4;
+      --accent-soft: #e7efff;
+      --warn: #8a5b00;
+      --warn-bg: #fff5d7;
+      font-family: Segoe UI, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111418;
+        --panel: #1b2027;
+        --text: #f0f3f7;
+        --muted: #a9b2be;
+        --line: #303946;
+        --accent: #76a7ff;
+        --accent-soft: #182844;
+        --warn: #ffd66e;
+        --warn-bg: #3a2c10;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    main {
+      width: min(1040px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 36px 0 48px;
+    }
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 21px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .panel.primary {
+      border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 2px 9px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    ol {
+      padding-left: 22px;
+      margin: 0;
+    }
+
+    li {
+      margin: 0 0 10px;
+      color: var(--text);
+    }
+
+    code {
+      display: inline-block;
+      max-width: 100%;
+      padding: 2px 6px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: color-mix(in srgb, var(--panel) 80%, var(--bg));
+      color: var(--text);
+      overflow-wrap: anywhere;
+      font-family: Consolas, ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.93em;
+    }
+
+    .note {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--warn-bg);
+      color: var(--warn);
+    }
+
+    .wide {
+      margin-top: 16px;
+    }
+
+    .example-list {
+      display: grid;
+      gap: 8px;
+      margin: 14px 0 0;
+    }
+
+    .example-list code {
+      display: block;
+      padding: 9px 10px;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 24px, 1040px);
+        padding-top: 24px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="tag">fakeviewport-win setup</div>
+      <h1>Configure the Chrome profile and choose your Protect grid URL.</h1>
+      <p>This setup window is only for signing in, finding the exact Live View grid you want, and copying that URL into <code>config.json</code>. It will not start kiosk mode.</p>
+    </header>
+
+    <section class="grid">
+      <article class="panel primary">
+        <div class="tag">Recommended</div>
+        <h2>Use your direct UNVR IP</h2>
+        <p>Best for a display computer on the same LAN as the UNVR. It avoids cloud routing and usually reconnects faster.</p>
+        <ol>
+          <li>Find the UNVR IP in UniFi Network, your router DHCP leases, or on the UNVR front panel / UniFi OS console settings.</li>
+          <li>Open <code>https://YOUR_UNVR_IP/protect</code> in this Chrome window.</li>
+          <li>Accept the local certificate warning if your browser shows one.</li>
+          <li>Sign in, open Protect, and choose the Live View grid you want.</li>
+          <li>Copy the full address from Chrome and paste it into <code>ProtectUrl</code> in <code>config.json</code>.</li>
+        </ol>
+        <h3>Direct URL shape</h3>
+        <p>Direct UNVR URLs usually look like this after you choose a dashboard or Live View grid:</p>
+        <div class="example-list">
+          <code>https://192.168.1.100/protect/dashboard/abc123def456</code>
+          <code>https://unvr.local/protect/dashboard/abc123def456</code>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="tag">Cloud option</div>
+        <h2>Use UniFi cloud access</h2>
+        <p>Use this when the display computer is not on the same local network, or when cloud access is easier for your site.</p>
+        <ol>
+          <li>Open <a href="https://unifi.ui.com/" target="_blank" rel="noreferrer">unifi.ui.com</a>.</li>
+          <li>Sign in and select your console.</li>
+          <li>Open Protect and choose the Live View grid you want.</li>
+          <li>Copy the full address from Chrome and paste it into <code>ProtectUrl</code> in <code>config.json</code>.</li>
+        </ol>
+        <h3>Cloud URL shape</h3>
+        <p>Cloud URLs include a long console identifier before the Protect path:</p>
+        <div class="example-list">
+          <code>https://unifi.ui.com/consoles/ABCDEF1234567890:1234567890/protect/dashboard</code>
+          <code>https://unifi.ui.com/consoles/ABCDEF1234567890:1234567890/protect/dashboard/abc123def456</code>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel wide">
+      <h2>Finish setup</h2>
+      <ol>
+        <li>Open <code>config.json</code> in this folder.</li>
+        <li>Paste your copied grid URL into <code>ProtectUrl</code>.</li>
+        <li>Fill <code>LoginUsername</code> and <code>LoginPassword</code> if you want automatic login recovery.</li>
+        <li>Close Chrome.</li>
+        <li>Run <code>start-fakeviewport-win.cmd</code>.</li>
+      </ol>
+      <p class="note">Credentials in <code>config.json</code> are plain text. Keep this folder on a secured display machine and do not push a filled-in password to GitHub.</p>
+    </section>
+
+    <section class="panel wide">
+      <h2>Start on Windows login</h2>
+      <p>After fakeviewport-win is working, run <code>install-startup-shortcut.cmd</code> to make it start automatically when this Windows user signs in.</p>
+      <ol>
+        <li><code>install-startup-shortcut.cmd</code> creates a shortcut named <code>fakeviewport-win.lnk</code>.</li>
+        <li>The shortcut is placed in <code>%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup</code>.</li>
+        <li>The shortcut runs <code>start-fakeviewport-win.cmd</code>.</li>
+        <li>Run <code>uninstall-startup-shortcut.cmd</code> to remove the startup shortcut later.</li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>
